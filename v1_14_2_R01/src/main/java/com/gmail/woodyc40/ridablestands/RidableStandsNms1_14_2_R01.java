@@ -19,16 +19,20 @@ public class RidableStandsNms1_14_2_R01 implements RidableStandsNms {
 
     @Override
     public void registerEntity() {
-        // TODO: Figure out how to get this to work in 1.14.x
-        // armorStandType = register("ridable_armor_stand", "armor_stand", RidableArmorStand::new, EnumCreatureType.MISC);
+        armorStandType = register(1, "ridable_armor_stand", "armor_stand", RidableArmorStand::new, EnumCreatureType.MISC);
     }
 
     // Lifted from: https://www.spigotmc.org/threads/1-14-nms-registering-custom-entity.371482/
-    private static <T extends Entity> EntityTypes<T> register(String name, String superTypeName, EntityTypes.b producer, EnumCreatureType type) {
-        Map<String, Type<?>> types = (Map<String, Type<?>>) DataConverterRegistry.a().getSchema(DataFixUtils.makeKey(SharedConstants.a().getWorldVersion())).findChoiceType(DataConverterTypes.ENTITY).types();
-        types.put("minecraft:" + name, types.get("minecraft:" + superTypeName));
+    private static <T extends Entity> EntityTypes<T> register(int id, String name, String superTypeName, EntityTypes.b producer, EnumCreatureType type) {
+        Map<Object, Type<?>> dataTypes = (Map<Object, Type<?>>) DataConverterRegistry.a()
+                        .getSchema(DataFixUtils.makeKey(SharedConstants.a().getWorldVersion()))
+                        .findChoiceType(DataConverterTypes.ENTITY)
+                        .types();
+        String keyName = "minecraft:" + name;
+        dataTypes.put(keyName, dataTypes.get("minecraft:" + superTypeName));
+
         EntityTypes.a<T> a = EntityTypes.a.a(producer, type);
-        return IRegistry.a(IRegistry.ENTITY_TYPE, name, a.a(name));
+        return IRegistry.a(IRegistry.ENTITY_TYPE, id, keyName, a.a(name));
     }
 
     @Override
