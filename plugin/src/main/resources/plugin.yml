@@ -1,0 +1,11 @@
+main: com.gmail.woodyc40.ridablestands.RidableStands
+name: RidableStands
+version: ${project.version}
+
+load: STARTUP
+api-version: "1.14"
+
+commands:
+  mountstand:
+    usage: /mountstand
+    description: Spawns a new armor stand and causes the player running the command to mount it
