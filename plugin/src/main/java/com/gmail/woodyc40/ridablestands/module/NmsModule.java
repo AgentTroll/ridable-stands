@@ -19,7 +19,7 @@ public class NmsModule extends AbstractModule {
 
         // Technically it is discouraged to have logic in
         // Guice Modules, but honestly I don't really care
-        if (versionString.startsWith("1.14.2")) {
+        if (versionString.startsWith("1.14")) {
             this.bind(RidableStandsNms.class).to(RidableStandsNms1_14_2_R01.class).asEagerSingleton();
         } else {
             this.plugin.getLogger().warning(String.format("RidableStandsNms is incompatible with Bukkit '%s'", versionString));
