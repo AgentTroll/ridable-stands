@@ -21,7 +21,7 @@ it.
 # Building
 
 ``` shell
-git clone https://github.com/AgentTroll/ridable-stands.git
+git clone https://github.com/caojohnny/ridable-stands.git
 cd ridable-stands
 mvn clean install
 ```
